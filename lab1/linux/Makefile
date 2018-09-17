@@ -1,14 +1,14 @@
 CC := cc
-CFLAGS := -ansi -pedantic -g
+CFLAGS := -ansi -pedantic -g -I..
 LIBS := -lrt -lpthread
 
 all: consumer producer
 
-consumer: consumer.o
+consumer: consumer.o togglecase.o
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
-consumer.o: consumer.c
-	$(CC) $(CFLAGS) -c $<
+consumer.o: consumer.c ../common/togglecase.c
+	$(CC) $(CFLAGS) -c $^
 
 producer: producer.o
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)

@@ -1,3 +1,4 @@
+#include "common/togglecase.h"
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,7 +18,7 @@ int main() {
     int shm_fd;
     void * ptr;
     char * msg;
-    int msg_length = 0, i = 0;
+    int length = 0;
 
     /* semaphore variables */
     const char * sendsem_name = "sendsem";
@@ -56,15 +57,8 @@ int main() {
 
     printf("Consumer received msg of size %lu\n", strlen(ptr));
     msg = (char *)ptr;
-    msg_length = strlen(ptr);
-    for (i = 0; i < msg_length; i++) {
-        if (isupper(msg[i])) {
-            msg[i] = tolower(msg[i]);
-        }
-        else {
-            msg[i] = toupper(msg[i]);
-        }
-    }
+    length = strlen(ptr);
+    togglecase(msg, length);
 
     sem_post(recvsem);
     sem_close(recvsem);
