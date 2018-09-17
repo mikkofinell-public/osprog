@@ -77,9 +77,6 @@ int _tmain() {
 	CloseHandle(hProducerSem);
 	CloseHandle(hConsumerSem);
 
-	_tprintf(TEXT("Press <enter> to continue: "));
-	_getch();
-
 	UnmapViewOfFile(pBuf);
 
 	CloseHandle(hMapFile);
